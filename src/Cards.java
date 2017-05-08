@@ -1,8 +1,8 @@
 
-public class Cards {
+public class Cards implements Comparable<Cards> {
 	private String rank;
 	private String suit;
-	public String getRank() {
+	public  String getRank() {
 		return rank;
 	}
 
@@ -27,8 +27,8 @@ public class Cards {
 		this.rank=rank;
 		this.suit=s;
     }
-	
-	
+
+
 
 	 @Override
 	public String toString() {
@@ -42,10 +42,17 @@ public class Cards {
 		return ranks;
 	}
 
-	enum suit {
+	enum suits {
 		SPADE,
 		HEART,
 		DIAMOND,
 		CLUB;
+	}
+
+	@Override
+	public int compareTo(Cards o) {
+		int n=getRank().compareTo(o.rank);
+		if(n==0) return o.suit.compareTo(getSuit());
+		else return n;
 	}
 }

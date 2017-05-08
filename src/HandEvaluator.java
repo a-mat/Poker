@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class HandEvaluator {
+public class HandEvaluator  {
 
 	enum HandCombination{
 		ROYAL_FLUSH(10),
@@ -17,41 +17,43 @@ public class HandEvaluator {
 		PAIR(2),
 		HIGH_CARD(1);
 
-		private int rankValue;
-		HandCombination(int rankValue){
-			this.rankValue=rankValue;
+		private int points;
+
+		HandCombination(int points){
+			this.points=points;
 		}
-		public  int getRankValue(){
-			return rankValue;
+		public  int getPoints(){
+			return points;
 		}
 	}
 	static Set<Cards> totalHand = new TreeSet<>();
-	
-	static Set<Cards> loadCards(List<Cards> someHand){
-		for(int i=0;i<someHand.size();i++){
-			//System.out.println(someHand.get(i));
-			totalHand.add(someHand.get(i));
-		}
 
-		//totalHand.addAll(someHand);
-		//totalHand.addAll(GameController.getCommunityCards());
+
+	static Set<Cards> loadCards(List<Cards> someHand){
+		for(Cards o : someHand) totalHand.add(o);
+		for(Cards b: GameController.communityCards){
+			System.out.println(b);
+			totalHand.add(b);
+		}
 		return totalHand;
 	}
 
 	public static void main(String[] args){
-		/*for(HandCombination type: HandCombination.values()){
-		System.out.println(type.rankValue);
-		}*/
 
-		Deck.populateDeck();
+		Deck.populateDeck();// takes Card Objects from Card class and populate it in a LinkedList of 52 objects(# of cards in a deck)
 		Deck.shuffleDeck();
-		System.out.println("deck of cards" +Deck.getDeck());
+		//System.out.println("deck of cards" +Deck.getDeck());
 		Player.getHand();
 		System.out.println("hand"+Player.hand);
 		System.out.println("deck after cards were given out"+Deck.getDeck());
 		System.out.println("community cards that are down,3"+GameController.theFlop());
 		System.out.println("deck after comm cards are out"+Deck.getDeck());
 		System.out.println("total extended hand (6cards)"+loadCards(Player.hand));
-
+		System.out.println();
 	}
+
+
+
+
+
 }
