@@ -1,8 +1,8 @@
 
-public class Cards {
+public class Cards implements Comparable<Cards> {
 	private String rank;
 	private String suit;
-	public String getRank() {
+	public  String getRank() {
 		return rank;
 	}
 
@@ -27,25 +27,46 @@ public class Cards {
 		this.rank=rank;
 		this.suit=s;
     }
-	
-	
 
-	 @Override
-	public String toString() {
-		return rank+" of "+ suit;
+
+
+	  Cards(Cards next) {
+		this.rank = next.getRank();
+		this.suit = next.getSuit();
+
 	}
 
 
 
-	private final static String[] ranks = {"1","2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"};
+	@Override
+	public String toString() {
+		 if(rank.equals("10")||
+			rank.equals("Jack")||
+			rank.equals("Queen")||
+			rank.equals("King") ||
+			rank.equals("Ace")) return rank+" of "+ suit;
+		 else return rank.substring(1)+" of "+ suit;
+	}
+
+
+
+	private final static String[] ranks = {"01","02","03","04","05","06","07","08","09","10","Jack","Queen","King","Ace"};
 	public static String[] getRanks(){
 		return ranks;
 	}
 
-	enum suit {
+	enum suits {
 		SPADE,
 		HEART,
 		DIAMOND,
 		CLUB;
+	}
+
+	@Override
+	public int compareTo(Cards o) {
+
+		int n=getRank().compareTo(o.rank);
+		if(n==0) return o.suit.compareTo(getSuit());
+		else return n;
 	}
 }

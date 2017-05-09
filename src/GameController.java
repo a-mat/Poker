@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
+	public static void setCommunityCards(List<Cards> communityCards) {
+		GameController.communityCards = communityCards;
+	}
 	static List<Cards> communityCards = new ArrayList<>();
 	static private int bettingPool=0;
 	static private int currentBet;
