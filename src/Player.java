@@ -5,11 +5,19 @@ import java.util.Map;
 
 public class Player {
 	static boolean playerStatus = true;
-	static List<Cards> hand = new ArrayList<>(3);
+	static List<Cards> hand = new ArrayList<>(2);
 	private String name;
 	private int cash;
 
+	
+	public static boolean isPlayerStatus() {
+		return playerStatus;
+	}
 
+	public static void setPlayerStatus(boolean playerStatus) {
+		Player.playerStatus = playerStatus;
+	}
+	
 	public String getName() {
 		return name;
 	}

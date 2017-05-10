@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-	public static void setCommunityCards(List<Cards> communityCards) {
+	public static void setCommunityCards(List<Cards> communityCards) { //just for troubleshoot
 		GameController.communityCards = communityCards;
 	}
 	static List<Cards> communityCards = new ArrayList<>();
