@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Player {
 	static boolean playerStatus = true;
@@ -63,6 +65,7 @@ public class Player {
 
 
 	public static void main(String[] args){
-
+		Map<Integer,String> handCombo = new HashMap<>();
+		System.out.println(handCombo.get(1));
 	}
 }
