@@ -30,6 +30,9 @@ public class Cards implements Comparable<Cards> {
 
 
 
+
+
+
 	  Cards(Cards next) {
 		this.rank = next.getRank();
 		this.suit = next.getSuit();
@@ -65,6 +68,7 @@ public class Cards implements Comparable<Cards> {
 
 	@Override
 	public int compareTo(Cards o) {
+
 
 		int n=getRank().compareTo(o.rank);
 		if(n==0) return o.suit.compareTo(getSuit());

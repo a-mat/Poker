@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+
 // straight flush aint perfecrt cause there could be biggero ne
 public class HandEvaluator {
 	static Set<Cards> totalHand = new TreeSet<>();
@@ -16,7 +17,9 @@ public class HandEvaluator {
 		ROYAL_FLUSH(10), STRAIGHT_FLUSH(9), FOUR_OF_A_KIND(8), FULL_HOUSE(7), FLUSH(6), STRAIGHT(5), THREE_OF_A_KIND(
 				4), TWO_PAIR(3), PAIR(2), HIGH_CARD(1);
 
+
 		private int points;
+
 
 		HandCombination(int points) {
 			this.points = points;
@@ -35,6 +38,7 @@ public class HandEvaluator {
 		}
 		return totalHand;
 	}
+
 
 	static int checkHand(List<Cards> hand){
 		int max=0;
@@ -278,5 +282,6 @@ public class HandEvaluator {
 		System.out.println(highCard());
 
 	}
+
 
 }
