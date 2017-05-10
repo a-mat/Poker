@@ -36,6 +36,24 @@ public class HandEvaluator {
 		return totalHand;
 	}
 
+	static int checkHand(List<Cards> hand){
+		int max=0;
+		max=royalFlush();
+		if(max<StraightFlush()) max=StraightFlush();
+		if(max<fourThreeKindTwoPairOnePair()) max=fourThreeKindTwoPairOnePair();
+		if(max<flushCheck()) max=flushCheck();
+		if(max<straightCheck()) max=straightCheck();
+		if(max<highCard()) max=highCard();
+		return max;
+	}
+
+	static String compareHand(List<Cards> hand,List<Cards> comp){
+		int player=checkHand(hand);
+		int computer = checkHand(comp);
+		if(player>computer) return "player";
+		if(computer>player) return "computer";
+		return "nothing";
+	}
 	static int royalFlush() {
 		double royalFlushCheck = 0;
 		for (Cards.suits p : Cards.suits.values()) {
