@@ -1,125 +1,123 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Computer {
-	 boolean compStatus = true;
-	List<Cards> hand2 = new ArrayList<>(2);
+public class Computer extends Player {
+	private  boolean playerStatus = true;
+
+
+	public boolean isPlayerStatus() {
+		return playerStatus;
+	}
+
+	public  void setPlayerStatus(boolean playerStatus) {
+		this.playerStatus = playerStatus;
+	}
+
+	private   List<Cards> hand = new ArrayList<>(2);
+
+	public   List<Cards> gethand() {
+		return hand;
+	}
+
+
+	public  List<Cards> sethand(){
+		for(int i=0;i<2;i++){
+				hand.add(Deck.getDeck().removeFirst());
+		}
+			return hand;
+	}
+
+
+
 	private String name;
-	private int cash;
+	private  int cash;
+	private int userCurrentBet;
 
-
-	public  boolean isCompStatus() {
-		return compStatus;
+	@Override
+	public int getUserCurrentBet() {
+		return userCurrentBet;
+	}
+	@Override
+	public void setUserCurrentBet(int userCurrentBet) {
+		this.userCurrentBet = userCurrentBet;
 	}
 
-	public void setCompStatus(boolean compStatus) {
-		this.compStatus = compStatus;
-	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
-
+	@Override
 	public int getCash() {
 		return cash;
 	}
-
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Override
 	public void setCash(int cash) {
 		this.cash = cash;
 	}
 
-	Computer(String name){
+	Computer(String name, int cash){
 		this.name=name;
+		this.cash=cash;
 	}
 
-	void compGenerator(int x){
-		switch(x){
-		case(1):
-			{
-				Computer june = new Computer( "June");
-				june.getHand();
-			}
-		case(2):
-			{
-			compGenerator(1);
-			Computer aaron = new Computer( "Aaron");
-			aaron.getHand();
-			}
-		case(3):
-			{
-			compGenerator(2);
-			Computer joe = new Computer( "Joe");
-			joe.getHand();
-			}
-		}
-
-
+	/*static void compGenerator(){
+		Computer june = new Computer( "June",20000);
+		june.getHand();
+		getNumberOfNpc().add(june);
+		Computer aaron = new Computer( "Aaron",500);
+		aaron.getHand();
+		getNumberOfNpc().add(aaron);
+		Computer joe = new Computer( "Joe",8000);
+		joe.getHand();
+		getNumberOfNpc().add(joe);
 	}
+*/
 
-	List<Cards> getHand(){
-		Deck.populateDeck();
-		Deck.shuffleDeck();
-		hand2.clear();
-		for(int i=0;i<2;i++){
-			hand2.add(Deck.getDeck().removeFirst());
-		}
-		return hand2;
-	}
+	/*public static List<Computer> getNumberOfNpc() {
+		return numberOfNpc;
+	}*/
 
+
+	@Override
 	void fold(){
-		compStatus=false;
+		setPlayerStatus(false);
 	}
 
+	@Override
 	void call(){
 		setCash(getCash()-GameController.getCurrentBet());
 		GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
 	}
-
+	@Override
 	void raise(int amount){
 		GameController.setCurrentBet(GameController.getCurrentBet()+amount);
 		setCash(getCash()-GameController.getCurrentBet());
 		GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
 	}
-
+	@Override
 	void initialBet(int initial){
 		GameController.setCurrentBet(initial);//establish current bet
 		setCash(getCash()-initial); // removes bet from cash
-		GameController.setBettingPool(initial);
+		GameController.setBettingPool(GameController.getBettingPool()+initial);
 
 	}
-
+	@Override
 	boolean check(){
 		if(GameController.getCurrentBet()==0) return true;
 		else return false;
 	}
-	static void test(){
-		Computer leeroy = new Computer( "Leeroy");
-		Computer tom = new Computer( "tom");
-		Computer joe = new Computer( "hoe");
 
-		leeroy.getHand();
-		tom.getHand();
-		joe.getHand();
 
-		System.out.println(leeroy.hand2);
-		System.out.println(tom.hand2);
-		System.out.println(joe.hand2);
-		System.out.println(tom.hand2);
 
-		leeroy.setCash(5);
-		tom.setCash(20);
-		joe.setCash(5);
-
-		System.out.println(tom.getCash());
-		System.out.println(leeroy.getCash());
-		System.out.println(joe.getCash());
+	@Override
+	public String toString() {
+		return name;
 	}
 
-	public static void main(String[] args){
-		test();
-	}
+
 }

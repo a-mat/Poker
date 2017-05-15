@@ -1,23 +1,45 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Player {
-	static boolean playerStatus = true;
-	static List<Cards> hand = new ArrayList<>(2);
-	private String name;
-	private int cash;
+	private int userCurrentBet;
+	public int getUserCurrentBet() {
+		return userCurrentBet;
+	}
 
-	
-	public static boolean isPlayerStatus() {
+	public void setUserCurrentBet(int userCurrentBet) {
+		this.userCurrentBet = userCurrentBet;
+	}
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	private  boolean playerStatus = true;
+	public  boolean isPlayerStatus() {
 		return playerStatus;
 	}
 
-	public static void setPlayerStatus(boolean playerStatus) {
-		Player.playerStatus = playerStatus;
+	public   void setPlayerStatus(boolean playerStatus) {
+		this.playerStatus = playerStatus;
 	}
-	
+
+	private  List<Cards> hand = new ArrayList<>(2);
+	public  List<Cards> getHand() {
+		return hand;
+	}
+
+	public  List<Cards> setHand(){
+		for(int i=0;i<2;i++){
+				hand.add(Deck.getDeck().removeFirst());
+		}
+			return hand;
+	}
+
+
+	private  String name;
+	private  int cash;
+
 	public String getName() {
 		return name;
 	}
@@ -34,23 +56,22 @@ public class Player {
 		this.cash = cash;
 	}
 
-	static List<Cards> getHand(){
-		//Deck.populateDeck();
-		//Deck.shuffleDeck();
-		for(int i=0;i<2;i++){
-			hand.add(Deck.getDeck().removeFirst());
-		}
-		return hand;
-	}
+
 
 
 	void fold(){
-		playerStatus=false;
+		setPlayerStatus(false);
 	}
 
 	void call(){
-		setCash(getCash()-GameController.getCurrentBet());
+		if(GameController.raiseCounter==1){
+			setCash(getCash()-(GameController.getCurrentBet()-getUserCurrentBet()));
+			GameController.setBettingPool(GameController.getBettingPool()
+					+(GameController.getCurrentBet()-getUserCurrentBet()));
+		}
+		else{setCash(getCash()-GameController.getCurrentBet());
 		GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
+		}
 	}
 
 	void raise(int amount){
@@ -58,22 +79,21 @@ public class Player {
 		setCash(getCash()-GameController.getCurrentBet());
 		GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
 	}
-	void check(){
+	boolean check(){
 
+		if(GameController.getCurrentBet()==0) return true;
+		else return false;
 	}
 	void initialBet(int initial){
 		GameController.setCurrentBet(initial);//establish current bet
 		setCash(getCash()-initial); // removes bet from cash
-		GameController.setBettingPool(initial);
-
-	}
-	void allIn(){
+		GameController.setBettingPool(GameController.getBettingPool()+initial);
 
 	}
 
 
-	public static void main(String[] args){
-		Map<Integer,String> handCombo = new HashMap<>();
-		System.out.println(handCombo.get(1));
-	}
+
+
+
+
 }

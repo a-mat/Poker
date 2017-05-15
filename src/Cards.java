@@ -30,9 +30,6 @@ public class Cards implements Comparable<Cards> {
 
 
 
-
-
-
 	  Cards(Cards next) {
 		this.rank = next.getRank();
 		this.suit = next.getSuit();
@@ -53,7 +50,7 @@ public class Cards implements Comparable<Cards> {
 
 
 
-	private final static String[] ranks = {"01","02","03","04","05","06","07","08","09","10","11","12",
+	private final static String[] ranks = {"02","03","04","05","06","07","08","09","10","11","12",
 			"13","14"};
 	public static String[] getRanks(){
 		return ranks;
@@ -68,7 +65,6 @@ public class Cards implements Comparable<Cards> {
 
 	@Override
 	public int compareTo(Cards o) {
-
 
 		int n=getRank().compareTo(o.rank);
 		if(n==0) return o.suit.compareTo(getSuit());
