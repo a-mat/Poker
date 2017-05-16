@@ -28,6 +28,7 @@ public class HandEvaluator {
 	}
 
 	static Set<Cards> loadCards(List<Cards> someHand) {
+		totalHand.clear();
 		for (Cards o : someHand)
 			totalHand.add(o);
 		for (Cards b : GameController.communityCards) {
@@ -36,7 +37,7 @@ public class HandEvaluator {
 		return totalHand;
 	}
 
-	static int checkHand(List<Cards> hand){
+	static HandCombination checkHand(Set<Cards> hand){
 		int max=0;
 		max=royalFlush();
 		if(max<StraightFlush()) max=StraightFlush();
@@ -44,16 +45,23 @@ public class HandEvaluator {
 		if(max<flushCheck()) max=flushCheck();
 		if(max<straightCheck()) max=straightCheck();
 		if(max<highCard()) max=highCard();
-		return max;
+		
+		//return max;
+		for(HandCombination combo:HandCombination.values()){
+			if(combo.getPoints()==max){
+				return combo;
+			}
+		}
+		return null;
 	}
 
-	static String compareHand(List<Cards> hand,List<Cards> comp){
+	/*static String compareHand(Set<Cards> hand,Set<Cards> comp){
 		int player=checkHand(hand);
 		int computer = checkHand(comp);
 		if(player>computer) return "player";
 		if(computer>player) return "computer";
 		return "nothing";
-	}
+	}*/
 	static int royalFlush() {
 		double royalFlushCheck = 0;
 		for (Cards.suits p : Cards.suits.values()) {
@@ -89,6 +97,7 @@ public class HandEvaluator {
 	}
 
 	static int StraightFlush() {
+		int straightFlushAlert=0;
 		LinkedList<Cards> sfc = new LinkedList<>();
 		LinkedList<Cards> sfc2 = new LinkedList<>();
 		Label: for (Cards.suits p : Cards.suits.values()) {
@@ -104,18 +113,21 @@ public class HandEvaluator {
 				System.out.println(sfc);
 			}
 			if (sfc.size() >= 5)
+				straightFlushAlert=1;
 				break Label;
 		}
-		for (int i = sfc.size() - 1; i >= 0; i--) {
-			if (Integer.parseInt(sfc.get(i).getRank()) - Integer.parseInt(sfc.get(i - 1).getRank()) == 1) {
-				sfc2.add(sfc.get(i));
-				if (sfc2.size() == 5)
-					break;
-				comboHolder.put(Integer.valueOf(HandCombination.STRAIGHT_FLUSH.getPoints()),
-						Integer.parseInt(sfc2.get(0).getRank()));
-				return HandCombination.STRAIGHT_FLUSH.getPoints();
-			} else
-				sfc2.clear();
+		if(straightFlushAlert==1){
+			for (int i = sfc.size() - 1; i >= 0; i--) {
+				if (Integer.parseInt(sfc.get(i).getRank()) - Integer.parseInt(sfc.get(i - 1).getRank()) == 1) {
+					sfc2.add(sfc.get(i));
+					if (sfc2.size() == 5)
+						break;
+					comboHolder.put(Integer.valueOf(HandCombination.STRAIGHT_FLUSH.getPoints()),
+							Integer.parseInt(sfc2.get(0).getRank()));
+					return HandCombination.STRAIGHT_FLUSH.getPoints();
+				} else
+					sfc2.clear();
+			}
 		}
 		return 0;
 	}
@@ -224,23 +236,28 @@ public class HandEvaluator {
 		for (int i = sc.size() - 1; i > 0; i--) {
 			if (Integer.parseInt(sc.get(i).getRank()) - Integer.parseInt(sc.get(i - 1).getRank()) == 1) {
 				sc2.add(sc.get(i));
-				if (sc2.size() == 5)
-					break;
-				comboHolder.put(Integer.valueOf(HandCombination.STRAIGHT.getPoints()),
-						Integer.parseInt(sc2.get(0).getRank()));
-				return HandCombination.STRAIGHT.getPoints();
-			} else
+				if (sc2.size() == 5){
+					comboHolder.put(Integer.valueOf(HandCombination.STRAIGHT.getPoints()),
+							Integer.parseInt(sc2.get(0).getRank()));
+					return HandCombination.STRAIGHT.getPoints();
+					
+				}
+				
+			} else if(Integer.parseInt(sc.get(i).getRank()) - Integer.parseInt(sc.get(i - 1).getRank())==0){
+				
+			}
+			else
 				sc2.clear();
 
 		}
 		return 0;
 	}
-		static int highCard(){
+	static int highCard(){
 			Iterator<Cards> it = ((TreeSet<Cards>) totalHand).descendingIterator();
 			while(it.hasNext()){
 				return HandCombination.HIGH_CARD.getPoints();
 			} return 0;
-		}
+	}
 
 
 	public static void main(String[] args) {
@@ -260,23 +277,30 @@ public class HandEvaluator {
 		// System.out.println();
 
 		List<Cards> communityCards1 = new ArrayList<>();
-		communityCards1.add(new Cards("07", "HEART"));
-		communityCards1.add(new Cards("08", "DIAMOND"));
-		communityCards1.add(new Cards("06", "HEART"));
-		communityCards1.add(new Cards("10", "DIAMOND"));
-		communityCards1.add(new Cards("14", "HEART"));
+		communityCards1.add(new Cards("08", "HEART"));
+		communityCards1.add(new Cards("02", "HEART"));
+		communityCards1.add(new Cards("13", "HEART"));
+		communityCards1.add(new Cards("05", "HEART"));
+		communityCards1.add(new Cards("07", "SPADE"));
 		GameController.setCommunityCards(communityCards1);
 		List<Cards> handtest = new ArrayList<>();
-		handtest.add(new Cards("09", "CLUB"));
-		handtest.add(new Cards("09", "SPADE"));
+		handtest.add(new Cards("06", "SPADE"));
+		handtest.add(new Cards("08", "SPADE"));
+		List<Cards> handtest2 = new ArrayList<>();
+		handtest2.add(new Cards("05", "HEART"));
+		handtest2.add(new Cards("10", "HEART"));
+		
 		System.out.println(loadCards(handtest));
+		System.out.println(checkHand(loadCards(handtest)));
+		//System.out.println(checkHand(loadCards(handtest2)));
+		//if(checkHand(loadCards(handtest)).getPoints()>checkHand(loadCards(handtest2)).getPoints())
 		// System.out.println(royalFlush());
-		// System.out.println(StraightFlush());
+		//System.out.println(StraightFlush());
 		//System.out.println(fourThreeKindTwoPairOnePair());
 		//System.out.println(flushCheck());
 		//System.out.println(straightCheck());
-		System.out.println(highCard());
-
+		//System.out.println(highCard());
+		
 	}
 
 }

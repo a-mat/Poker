@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class GameController {
 	static int raiseCounter=0;
+
 	static List<Player> allUsers = new ArrayList<>();
 
 
@@ -19,6 +20,11 @@ public class GameController {
 
 
 	static List<Cards> communityCards = new ArrayList<>();
+	public static void setCommunityCards(List<Cards> communityCards) {
+		GameController.communityCards = communityCards;
+	}
+
+
 	static private int bettingPool=0;
 	static private int currentBet;
 
@@ -139,6 +145,9 @@ public class GameController {
 	}
 
 	 static void play(){
+		  int winnerComboCounter=0;
+		 String winner=new String("");
+		 String winningHand = new String("");
 		 setAllUsers();
 		 for(int i=0;i<getAllUsers().size();i++){
 			 round(getAllUsers().get(i));
@@ -162,16 +171,61 @@ public class GameController {
 		 System.out.println("flop: "+ theFlop());
 		 for(int i=0;i<getAllUsers().size();i++){
 			 round(getAllUsers().get(i));
+			 if(i==getAllUsers().size()-1){
+				 for(Player user:getAllUsers()){
+					 System.out.println(getCurrentBet());
+					 System.out.println(user.getUserCurrentBet());
+					 if(getCurrentBet()!=user.getUserCurrentBet()){
+						 raiseCounter=1;
+						 round(user);
+					 }
+				 }
+			 }
 		 }
 		 setBetStatus(true);
 		 System.out.println("betting pool: "+getBettingPool());
 		 System.out.println("turn: "+theTurn());
 		 for(int i=0;i<getAllUsers().size();i++){
 			 round(getAllUsers().get(i));
+			 if(i==getAllUsers().size()-1){
+				 for(Player user:getAllUsers()){
+					 System.out.println(getCurrentBet());
+					 System.out.println(user.getUserCurrentBet());
+					 if(getCurrentBet()!=user.getUserCurrentBet()){
+						 raiseCounter=1;
+						 round(user);
+					 }
+				 }
+			 }
 		 }
 		 setBetStatus(true);
 		 System.out.println("betting pool: "+getBettingPool());
 		 System.out.println("river: "+theRiver());
+		 for(int i=0;i<getAllUsers().size();i++){
+			 round(getAllUsers().get(i));
+			 if(i==getAllUsers().size()-1){
+				 for(Player user:getAllUsers()){
+					 System.out.println(getCurrentBet());
+					 System.out.println(user.getUserCurrentBet());
+					 if(getCurrentBet()!=user.getUserCurrentBet()){
+						 raiseCounter=1;
+						 round(user);
+					 }
+				 }
+			 }
+		 }
+		 setBetStatus(true);
+		 for(Player user: getAllUsers()){
+			 System.out.println(user.getName()+" had the hand of "+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
+			if(winnerComboCounter< HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())).getPoints()){
+				 winnerComboCounter=  HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())).getPoints();
+				 winner =new String( user.getName());
+				 winningHand=new String( String.valueOf(HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand()))));
+
+			}
+
+		 } System.out.println("the winner is "+ winner+" with the hand of "+ winningHand+" and "+winnerComboCounter
+				 +" points");
 
 	 }
 

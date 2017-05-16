@@ -65,23 +65,7 @@ public class Computer extends Player {
 		this.cash=cash;
 	}
 
-	/*static void compGenerator(){
-		Computer june = new Computer( "June",20000);
-		june.getHand();
-		getNumberOfNpc().add(june);
-		Computer aaron = new Computer( "Aaron",500);
-		aaron.getHand();
-		getNumberOfNpc().add(aaron);
-		Computer joe = new Computer( "Joe",8000);
-		joe.getHand();
-		getNumberOfNpc().add(joe);
-	}
-*/
-
-	/*public static List<Computer> getNumberOfNpc() {
-		return numberOfNpc;
-	}*/
-
+	
 
 	@Override
 	void fold(){
