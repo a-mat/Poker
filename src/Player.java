@@ -54,7 +54,7 @@ public class Player {
 
 	public void setCash(int cash) {
 		this.cash = cash;
-	}
+	} 
 
 
 

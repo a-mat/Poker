@@ -11,7 +11,7 @@ public class Cards implements Comparable<Cards> {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
-
+ 
 
 	public String getSuit() {
 		return suit;

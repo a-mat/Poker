@@ -25,7 +25,7 @@ public class Computer extends Player {
 				hand.add(Deck.getDeck().removeFirst());
 		}
 			return hand;
-	}
+	} 
 
 
 
@@ -74,8 +74,15 @@ public class Computer extends Player {
 
 	@Override
 	void call(){
-		setCash(getCash()-GameController.getCurrentBet());
-		GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
+		if(GameController.raiseCounter==1){
+			setCash(getCash()-(GameController.getCurrentBet()-getUserCurrentBet()));
+			GameController.setBettingPool(GameController.getBettingPool()
+					+(GameController.getCurrentBet()-getUserCurrentBet()));
+		}
+		else {
+			setCash(getCash()-GameController.getCurrentBet());
+			GameController.setBettingPool(GameController.getBettingPool()+GameController.getCurrentBet());
+		}
 	}
 	@Override
 	void raise(int amount){

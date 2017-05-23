@@ -67,23 +67,22 @@ public class GameController {
 		Deck.shuffleDeck();
 		System.out.println(Deck.getDeck());
 		Player player = new Player();
-		player.setName("player");
+		player.setName("Player");
 		player.setCash(5000);
 		player.setHand();
-		System.out.println(player.getHand());
+		
 		allUsers.add(player);
-		Computer june = new Computer( "June",20000);
+		Computer june = new Computer( "June",5000);
 		june.setHand();
-		System.out.println(june.getHand());
+		
 		allUsers.add(june);
-		Computer aaron = new Computer( "Aaron",500);
+		Computer aaron = new Computer( "Aaron",5000);
 		aaron.setHand();
-		System.out.println(aaron.getHand());
+		
 		allUsers.add(aaron);
-		Computer joe = new Computer( "Joe",8000);
+		Computer joe = new Computer( "Joe",5000);
 		joe.setHand();
-		System.out.println(joe.getHand());
-		System.out.println(Deck.getDeck());
+		
 		allUsers.add(joe);
 
 	}
@@ -230,66 +229,7 @@ public class GameController {
 	 }
 
 	public static void main(String[] args){
-		//setBettingPool(0);
-		//play();
-		/*setAllUsers();
-		System.out.println(getAllUsers().get(2).hand);
-		System.out.println(getAllUsers().get(0).hand);
-
-		System.out.println(getAllUsers().get(1).hand);*/
-
-		/*Deck.populateDeck();
-		Deck.shuffleDeck();
-		Deck.shuffleDeck();
-		System.out.println(Deck.getDeck());
-		Player poop = new Player();
-		poop.setHand();
-		poop.setName("heyyo");
-		poop.setUserCurrentBet(10);
-		System.out.println("user current bet:"+ poop.getUserCurrentBet());
-
-		Player tom = new Computer("Tommy",5);
-		Player hohn = new Computer("johm",5);
-		tom.setUserCurrentBet(20);
-		System.out.println("user current bet:"+ tom.getUserCurrentBet());
-		hohn.setUserCurrentBet(25);
-		System.out.println("user current bet:"+ hohn.getUserCurrentBet());
-		tom.setHand();
-		hohn.setHand();
-		System.out.println(poop.getHand());
-		System.out.println(tom.getHand());
-		System.out.println(hohn.getHand());
-
-		System.out.println(Deck.getDeck());
-		System.out.println("player: "+poop.isPlayerStatus());
-		poop.setPlayerStatus(false);
-		System.out.println(poop.isPlayerStatus());
-
-		System.out.println("tom: "+tom.isPlayerStatus());
-		tom.setPlayerStatus(false);
-		System.out.println(tom.isPlayerStatus());
-		System.out.println("hohn: "+hohn.isPlayerStatus());
-		hohn.setPlayerStatus(false);
-		System.out.println(hohn.isPlayerStatus());
-
-
-		tom.setUserCurrentBet(50);
-		hohn.setUserCurrentBet(60);
-		System.out.println(tom.getUserCurrentBet());
-		System.out.println(hohn.getUserCurrentBet());
-
-		poop.setUserCurrentBet(90);
-		System.out.println(poop.getUserCurrentBet());
-
-		System.out.println(tom.getCash());
-		hohn.setCash(20);
-		System.out.println(hohn.getCash());
-
-		tom.initialBet(20);
-		System.out.println(tom.getCash());
-		System.out.println(tom.isPlayerStatus());*/
-
-		//setAllUsers();
+		
 		play();
 
 
