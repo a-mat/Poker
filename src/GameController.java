@@ -47,6 +47,7 @@ public class GameController {
 	static List<Cards> getCommunityCards(){
 		return communityCards;
 	}
+
 	static List<Cards> theFlop(){
 		for(int i=0;i<3;i++){
 			communityCards.add(Deck.getDeck().removeFirst());
@@ -70,19 +71,19 @@ public class GameController {
 		player.setName("Player");
 		player.setCash(5000);
 		player.setHand();
-		
+
 		allUsers.add(player);
 		Computer june = new Computer( "June",5000);
 		june.setHand();
-		
+
 		allUsers.add(june);
 		Computer aaron = new Computer( "Aaron",5000);
 		aaron.setHand();
-		
+
 		allUsers.add(aaron);
 		Computer joe = new Computer( "Joe",5000);
 		joe.setHand();
-		
+
 		allUsers.add(joe);
 
 	}
@@ -141,6 +142,7 @@ public class GameController {
 			}
 
 		}
+		 scn.close();
 	}
 
 	 static void play(){
@@ -229,7 +231,7 @@ public class GameController {
 	 }
 
 	public static void main(String[] args){
-		
+
 		play();
 
 

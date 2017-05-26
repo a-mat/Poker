@@ -54,7 +54,7 @@ public class Player {
 
 	public void setCash(int cash) {
 		this.cash = cash;
-	} 
+	}
 
 
 
@@ -64,7 +64,7 @@ public class Player {
 	}
 
 	void call(){
-		if(GameController.raiseCounter==1){
+		if(GameController.raiseCounter>0){
 			setCash(getCash()-(GameController.getCurrentBet()-getUserCurrentBet()));
 			GameController.setBettingPool(GameController.getBettingPool()
 					+(GameController.getCurrentBet()-getUserCurrentBet()));

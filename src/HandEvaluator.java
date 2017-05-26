@@ -45,7 +45,7 @@ public class HandEvaluator {
 		if(max<flushCheck()) max=flushCheck();
 		if(max<straightCheck()) max=straightCheck();
 		if(max<highCard()) max=highCard();
-		
+
 		//return max;
 		for(HandCombination combo:HandCombination.values()){
 			if(combo.getPoints()==max){
@@ -240,11 +240,11 @@ public class HandEvaluator {
 					comboHolder.put(Integer.valueOf(HandCombination.STRAIGHT.getPoints()),
 							Integer.parseInt(sc2.get(0).getRank()));
 					return HandCombination.STRAIGHT.getPoints();
-					
+
 				}
-				
+
 			} else if(Integer.parseInt(sc.get(i).getRank()) - Integer.parseInt(sc.get(i - 1).getRank())==0){
-				
+
 			}
 			else
 				sc2.clear();
@@ -289,7 +289,7 @@ public class HandEvaluator {
 		List<Cards> handtest2 = new ArrayList<>();
 		handtest2.add(new Cards("05", "HEART"));
 		handtest2.add(new Cards("10", "HEART"));
-		
+
 		System.out.println(loadCards(handtest));
 		System.out.println(checkHand(loadCards(handtest)));
 		//System.out.println(checkHand(loadCards(handtest2)));
@@ -300,7 +300,7 @@ public class HandEvaluator {
 		//System.out.println(flushCheck());
 		//System.out.println(straightCheck());
 		//System.out.println(highCard());
-		
+
 	}
 
 }

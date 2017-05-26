@@ -11,7 +11,7 @@ public class Deck {
 			for(Cards.suits s : Cards.suits.values()){
 				Decks.add(new Cards(Cards.getRanks()[j],String.valueOf(s)));
 			}
-		} 
+		}
 	}
 
 	static List<Cards> shuffleDeck(){
@@ -30,7 +30,7 @@ public class Deck {
 		System.out.println( Decks.getLast());
 		//System.out.println(Deck);
 		//System.out.println(Cards.getRanks()[1]);
-		
+
 
 
 	}
