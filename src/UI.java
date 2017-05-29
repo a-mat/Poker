@@ -171,13 +171,15 @@ public class UI extends Application {
 		});
 
 		/*
-		 *try and catch to make sure the only a number is added
-		 *the player invokes initialBet() method from the player class and all fields in the UI second scene
-		 *are updated to reflect those changes( player.cash, bettingpool, currentBet, etc)
-		 *The computer AI is invoked to make the computers choose their actions based on chances
-		 *if a raise was detected ( if players userCurrentBet != currentBet), then the raise and call btns are added
-		 * and the program stops. If not , commCards are put on the screen based on a commCard counter and the bet
-		 * button is put back to restart. commCard acts as a "round" counter
+		 * try and catch to make sure the only a number is added the player
+		 * invokes initialBet() method from the player class and all fields in
+		 * the UI second scene are updated to reflect those changes(
+		 * player.cash, bettingpool, currentBet, etc) The computer AI is invoked
+		 * to make the computers choose their actions based on chances if a
+		 * raise was detected ( if players userCurrentBet != currentBet), then
+		 * the raise and call btns are added and the program stops. If not ,
+		 * commCards are put on the screen based on a commCard counter and the
+		 * bet button is put back to restart. commCard acts as a "round" counter
 		 */
 		betText.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent ae) {
@@ -192,13 +194,11 @@ public class UI extends Application {
 						GameController.getAllUsers().get(0).initialBet(Integer.valueOf(betText.getText()));
 						GameController.setBetStatus(false);
 						GameController.getAllUsers().get(0).setUserCurrentBet(GameController.getCurrentBet());
-						System.out.println("player current" + GameController.getAllUsers().get(0).getUserCurrentBet());
 
 						currentBetLabel.setText("bet: " + String.valueOf(GameController.getCurrentBet()));
 						potLabel.setText("Pot: " + String.valueOf(GameController.getBettingPool()));
 						playaCash.setText(String.valueOf(GameController.getAllUsers().get(0).getCash()));
 						playaStatus.setText("Player Bet " + betText.getText() + " dollars");
-						System.out.println("should be 10 less " + GameController.getAllUsers().get(0).getCash());
 
 						rootNode2.getChildren().remove(betText);
 						computerAi();
@@ -210,7 +210,6 @@ public class UI extends Application {
 							rootNode2.add(foldBtn, 38, 14);
 						} else {
 							commCheck++;
-							System.out.println("commcheck after it has risen in bet" + commCheck);
 							if (commCheck == 1) {
 
 								GameController.raiseCounter = 0;
@@ -221,7 +220,6 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 2) {
 
@@ -231,7 +229,6 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 3) {
 
@@ -241,10 +238,8 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 4) {
-								System.out.println(GameController.getCommunityCards());
 								GameController.raiseCounter = 0;
 								int winnerComboCounter = 0;
 
@@ -260,6 +255,8 @@ public class UI extends Application {
 										if (user.getName().equals("Aaron"))
 											aaronStatus.setText("Aaron had"
 													+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
+										System.out.println(user.getName() + " had the hand of "
+												+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
 										if (user.getName().equals("Joe"))
 											joeStatus.setText("Joe had"
 													+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
@@ -296,7 +293,8 @@ public class UI extends Application {
 			}
 		});
 		/*
-		 * the user sets his status as false and the computer AI finishes the rest of the game
+		 * the user sets his status as false and the computer AI finishes the
+		 * rest of the game
 		 */
 		foldBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent ae) {
@@ -319,7 +317,6 @@ public class UI extends Application {
 					currentBetLabel.setText("bet: " + String.valueOf(GameController.getCurrentBet()));
 					potLabel.setText("Pot: " + String.valueOf(GameController.getBettingPool()));
 					if (commCheck == 1) {
-						System.out.println(GameController.getCommunityCards());
 						GameController.raiseCounter = 0;
 						communityCard
 								.setText(String.valueOf(GameController.theFlop()).replace("[", "").replace("]", ""));
@@ -328,14 +325,12 @@ public class UI extends Application {
 
 					}
 					if (commCheck == 2) {
-						System.out.println(GameController.getCommunityCards());
 						GameController.raiseCounter = 0;
 						communityCard
 								.setText(String.valueOf(GameController.theTurn()).replace("[", "").replace("]", ""));
 
 					}
 					if (commCheck == 3) {
-						System.out.println(GameController.getCommunityCards());
 						GameController.raiseCounter = 0;
 						communityCard
 								.setText(String.valueOf(GameController.theRiver()).replace("[", "").replace("]", ""));
@@ -357,11 +352,11 @@ public class UI extends Application {
 								if (user.getName().equals("Aaron"))
 									aaronStatus.setText("Aaron had"
 											+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
+								System.out.println(user.getName() + " had the hand of "
+										+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
 								if (user.getName().equals("Joe"))
 									joeStatus.setText("Joe had"
 											+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
-								System.out.println(user.getName() + " had the hand of "
-										+ HandEvaluator.checkHand(HandEvaluator.loadCards(user.getHand())));
 								if (winnerComboCounter < HandEvaluator
 										.checkHand(HandEvaluator.loadCards(user.getHand())).getPoints()) {
 									winnerComboCounter = HandEvaluator
@@ -414,12 +409,10 @@ public class UI extends Application {
 						for (int i = 1; i < GameController.getAllUsers().size(); i++) {
 							if (i == 2) {
 								round(GameController.getAllUsers().get(i), 2, 3);
-								System.out.println(GameController.getAllUsers().get(i) + "called");
 								GameController.getAllUsers().get(i).setUserCurrentBet(GameController.getCurrentBet());
 							} else {
 								round(GameController.getAllUsers().get(i), 2, 3); // make
 																					// alhorithim
-								System.out.println(GameController.getAllUsers().get(i) + "called");
 								GameController.getAllUsers().get(i).setUserCurrentBet(GameController.getCurrentBet());
 							}
 							juneCash.setText(String.valueOf(GameController.getAllUsers().get(1).getCash()));
@@ -450,9 +443,7 @@ public class UI extends Application {
 				for (int i = 1; i < GameController.getAllUsers().size(); i++) {
 					if (GameController.getAllUsers().get(i).isPlayerStatus() == true) {
 						if (GameController.getCurrentBet() == GameController.getAllUsers().get(i).getUserCurrentBet()) {
-							System.out.println("call method. it becomes equals so comm cards come out");
 							commCheck++;
-							System.out.println("commcheck after it has called" + commCheck);
 							if (commCheck == 1) {
 
 								GameController.raiseCounter = 0;
@@ -463,7 +454,6 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 2) {
 
@@ -473,7 +463,6 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 3) {
 
@@ -483,10 +472,8 @@ public class UI extends Application {
 								rootNode2.add(betBtn, 25, 14);
 								// rootNode2.add(checkBtn, 30, 14);
 								rootNode2.add(foldBtn, 35, 14);
-								System.out.println(GameController.getCommunityCards());
 							}
 							if (commCheck == 4) {
-								System.out.println(GameController.getCommunityCards());
 								GameController.raiseCounter = 0;
 								int winnerComboCounter = 0;
 
@@ -547,6 +534,12 @@ public class UI extends Application {
 
 		playAgainBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent ae) {
+				rootNode2.getChildren().remove(playAgainBtn);
+				rootNode2.getChildren().remove(crdLabel);
+				rootNode2.getChildren().remove(communityCard);
+				GameController.getCommunityCards().clear();
+				commCheck = 0;
+
 				Deck.getDeck().clear();
 				Deck.populateDeck();
 				Deck.shuffleDeck();
@@ -555,11 +548,12 @@ public class UI extends Application {
 					if (user.getName().equals(winner)) {
 						user.setCash(user.getCash() + GameController.getBettingPool());
 					}
-					System.out.println(user + " " + user.getHand());
+
 					user.setUserCurrentBet(0);
 					user.getHand().clear();
 					user.setHand();
-					System.out.println(user + " " + user.getHand());
+
+					user.setPlayerStatus(true);
 				}
 				GameController.setCurrentBet(0);
 				GameController.setBettingPool(0);
@@ -575,12 +569,7 @@ public class UI extends Application {
 				aaronStatus.setText("");
 				joeStatus.setText("");
 				bottomInfo.setText("");
-				communityCard.setText("");
-				GameController.getCommunityCards().clear();
-				commCheck = 0;
-				rootNode2.getChildren().remove(playAgainBtn);
 				crdLabel.setText("Hand: " + String.valueOf(GameController.getAllUsers().get(0).getHand()));
-				rootNode2.getChildren().remove(crdLabel);
 				rootNode2.add(dealCrd, 0, 12);
 
 			}
@@ -591,12 +580,13 @@ public class UI extends Application {
 
 	/*
 	 * allows computers to make moves depending on the parameters put in
-	 * @param user
-	 * 			the computer that is making the decision
-	 * @choice
-	 * 			whether the computer raise, call or fold
-	 * @raise
-	 * 			the raise amount the computer wants to raise. If call or fold is selected, then raise gets ignored
+	 *
+	 * @param user the computer that is making the decision
+	 *
+	 * @choice whether the computer raise, call or fold
+	 *
+	 * @raise the raise amount the computer wants to raise. If call or fold is
+	 * selected, then raise gets ignored
 	 *
 	 */
 	void round(Player user, int choice, int raise) {
@@ -612,9 +602,6 @@ public class UI extends Application {
 					GameController.raiseCounter++;
 					currentBetLabel.setText("bet: " + String.valueOf(GameController.getCurrentBet()));
 					potLabel.setText("Pot: " + String.valueOf(GameController.getBettingPool()));
-					System.out.println("what the user put the round " + user.getUserCurrentBet());
-					System.out.println("the current bet of the round " + GameController.getCurrentBet());
-					System.out.println("the total betting pool " + GameController.getBettingPool());
 					compAction = "raise " + raise;
 					break;
 				case (1):
@@ -623,7 +610,6 @@ public class UI extends Application {
 					break;
 				case (2):
 					user.call();
-					System.out.println(GameController.getCurrentBet());
 					user.setUserCurrentBet(GameController.getCurrentBet());
 					currentBetLabel.setText("bet: " + String.valueOf(GameController.getCurrentBet()));
 					potLabel.setText("Pot: " + String.valueOf(GameController.getBettingPool()));
@@ -633,14 +619,13 @@ public class UI extends Application {
 
 			}
 
-
-
 		}
 	}
 
 	/*
-	 * the computerAi() decides what move to make. THis is more chance rather than actual intelligence.
-	 * A computer is set to pick call more likely than raise and fold.
+	 * the computerAi() decides what move to make. THis is more chance rather
+	 * than actual intelligence. A computer is set to pick call more likely than
+	 * raise and fold.
 	 */
 	void computerAi() {
 		int chance;
@@ -649,14 +634,12 @@ public class UI extends Application {
 		for (int i = 1; i < GameController.getAllUsers().size(); i++) {
 			if (GameController.getAllUsers().get(i).isPlayerStatus() == true) {
 				if (GameController.raiseCounter > 2) {
-					System.out.println("not raise");
 					chance = (int) (Math.random() * 101);
 					if (chance < 90)
 						choice = 2;
 					if (chance >= 90)
 						choice = 1;
 				} else {
-					System.out.println(" raise");
 					chance = (int) (Math.random() * 101);
 					if (chance < 75)
 						choice = 2;
