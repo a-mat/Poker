@@ -97,7 +97,6 @@ public class GameController {
 	static void setAllUsers() {
 		Deck.populateDeck();
 		Deck.shuffleDeck();
-		System.out.println(Deck.getDeck());
 
 		Player player = new Player();
 		player.setName("Player");

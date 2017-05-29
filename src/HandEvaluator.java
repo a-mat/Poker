@@ -105,12 +105,10 @@ public class HandEvaluator {
 	static int royalFlush() {
 		double royalFlushCheck = 0;
 		for (Cards.suits p : Cards.suits.values()) {
-			System.out.println("p " + p);
 			royalFlushCheck = 0;
 			Iterator<Cards> it = totalHand.iterator();
 			while (it.hasNext()) {
 				Cards c = it.next();
-				System.out.println("c :  " + c);
 				if (c.getRank().equals("10") && c.getSuit().equals(String.valueOf(p)))
 					royalFlushCheck += 2;
 
@@ -122,7 +120,6 @@ public class HandEvaluator {
 					royalFlushCheck += 11;
 				if (c.getRank().equals("14") && c.getSuit().equals(String.valueOf(p)))
 					royalFlushCheck += 15.2;
-				System.out.println(royalFlushCheck);
 			}
 			if (royalFlushCheck == 38.2) {
 				break;
@@ -153,15 +150,12 @@ public class HandEvaluator {
 		LinkedList<Cards> sfc2 = new LinkedList<>();
 		Label: for (Cards.suits p : Cards.suits.values()) {
 			sfc = new LinkedList<>();
-			System.out.println("p " + p);
 			Iterator<Cards> it = totalHand.iterator();
 			while (it.hasNext()) {
 				Cards n = it.next();
 				if (n.getSuit().equals(String.valueOf(p))) {
 					sfc.add(n);
-					System.out.println("equal");
 				}
-				System.out.println(sfc);
 			}
 			if (sfc.size() >= 5)
 				straightFlushAlert = 1;
@@ -215,13 +209,10 @@ public class HandEvaluator {
 
 			counter = 0;
 			pairCounter = 0;
-			System.out.println("c " + c);
 			for (Cards t : totalHand) {
-				System.out.println("t: " + t);
 				if (t.getRank().equals(c.getRank())) {
 
 					pairCounter++;
-					System.out.println("pair counter " + pairCounter);
 
 				}
 
@@ -242,26 +233,19 @@ public class HandEvaluator {
 			}
 			if (pairCounter == (2) && counter != 2) {
 				d = new Cards(c);
-				System.out.println("went into 2");
 				if (handCombo.get(2) == null) {
-					System.out.println("added into map");
 					handCombo.put(2, d.getRank());
-					System.out.println("hand combo" + handCombo);
 				}
 				if (!(handCombo.get(2).equals(d.getRank())))
 					counter++;
-				System.out.println("counter+ " + counter);
 			}
 			if (counter == 1 && pairCounter == (2)) {
-				System.out.println("we inside");
 				d = new Cards(c);
 				handCombo.put(1, d.getRank());
-				System.out.println("second pair " + handCombo);
 			}
 
 		}
 		if (!(handCombo.get(4) == null)) {
-			System.out.println("Highest card" + d.getRank());
 			return HandCombination.FOUR_OF_A_KIND.getPoints();
 
 		} else if (!(handCombo.get(3) == null) && !(handCombo.get(2) == null)) {
@@ -316,7 +300,6 @@ public class HandEvaluator {
 		while (it.hasNext()) {
 			sc.add(it.next());
 		}
-		System.out.println(sc);
 		for (int i = sc.size() - 1; i > 0; i--) {
 			if (Integer.parseInt(sc.get(i).getRank()) - Integer.parseInt(sc.get(i - 1).getRank()) == 1) {
 				sc2.add(sc.get(i));

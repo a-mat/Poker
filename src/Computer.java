@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
  * Computer class is a subclass of Player and defines the computers that the players go up against.
  * all methods are overridden from the player class
  */
@@ -76,7 +76,6 @@ public class Computer extends Player {
 
 	@Override
 	void call() {
-		System.out.println(GameController.raiseCounter);
 		if (GameController.raiseCounter > 0) {
 			setCash(getCash() - (GameController.getCurrentBet() - getUserCurrentBet()));
 			GameController.setBettingPool(
