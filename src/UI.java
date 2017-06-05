@@ -2,11 +2,16 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /*
@@ -17,6 +22,7 @@ import javafx.stage.Stage;
  *
  */
 public class UI extends Application {
+
 
 	Scene firstScene;
 	Scene secondScene;
@@ -84,11 +90,26 @@ public class UI extends Application {
 		 * //second scene where the game is actually played
 		 */
 
+		StackPane under = new StackPane();
+		Pane underPane = new Pane();
+		secondScene = new Scene(under, 900, 400);
+		Rectangle statusRec = new Rectangle(10,295,190,20);
+		statusRec.setFill(Color.ALICEBLUE);
+		statusRec.setStroke(Color.RED);
+
+		under.getChildren().add(underPane);
+
 		rootNode2 = new GridPane();
+		under.getChildren().add(rootNode2);
 		rootNode2.setHgap(10);
 		rootNode2.setVgap(10);
 		rootNode2.setPadding(new Insets(0, 10, 0, 10));
-		secondScene = new Scene(rootNode2, 900, 400);
+		//secondScene = new Scene(rootNode2, 900, 400);
+
+
+
+
+
 
 		// player info
 
@@ -147,7 +168,7 @@ public class UI extends Application {
 
 				rootNode2.getChildren().remove(dealCrd);
 				rootNode2.add(crdLabel, 0, 11, 30, 12);
-
+				underPane.getChildren().add(statusRec);
 				bottomInfo.setWrapText(true);
 				rootNode2.add(betBtn, 25, 15);
 				// rootNode2.add(checkBtn, 30, 14);
@@ -671,7 +692,7 @@ public class UI extends Application {
 					aaronCash.setText(String.valueOf(GameController.getAllUsers().get(2).getCash()));
 				}
 				if (i == 3) {
-					joeStatus.setText("Joe" + compAction);
+					joeStatus.setText("Joe " + compAction);
 					joeCash.setText(String.valueOf(GameController.getAllUsers().get(3).getCash()));
 				}
 			}
