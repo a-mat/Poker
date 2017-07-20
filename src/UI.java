@@ -56,7 +56,7 @@ public class UI extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-
+		System.out.println(GameController.getAllUsers().get(0).getHand().get(0));
 	}
 
 	@Override
@@ -93,9 +93,9 @@ public class UI extends Application {
 		StackPane under = new StackPane();
 		Pane underPane = new Pane();
 		secondScene = new Scene(under, 900, 400);
-		Rectangle statusRec = new Rectangle(10,295,190,20);
-		statusRec.setFill(Color.ALICEBLUE);
-		statusRec.setStroke(Color.RED);
+		//Rectangle statusRec = new Rectangle(10,295,190,20);
+		//statusRec.setFill(Color.ALICEBLUE);
+		//statusRec.setStroke(Color.RED);
 
 		under.getChildren().add(underPane);
 
@@ -168,7 +168,7 @@ public class UI extends Application {
 
 				rootNode2.getChildren().remove(dealCrd);
 				rootNode2.add(crdLabel, 0, 11, 30, 12);
-				underPane.getChildren().add(statusRec);
+				//underPane.getChildren().add(statusRec);
 				bottomInfo.setWrapText(true);
 				rootNode2.add(betBtn, 25, 15);
 				// rootNode2.add(checkBtn, 30, 14);
